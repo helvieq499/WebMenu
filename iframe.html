@@ -1,0 +1,9 @@
+<script>
+  let worker = new SharedWorker('worker.js');
+  window.onmessage = msg => {
+    if (msg.data[0] == "set-controller")
+       window.parent.postMessage(["forbidden"], "*");
+    else worker.port.postMessage(msg.data);
+  }
+  worker.port.onmessage = msg => window.parent.postMessage(msg.data, "*");
+</script>
