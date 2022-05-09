@@ -1,56 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Menu</title>
-    <style>
-        body {
-            display: flex;
-            margin: 0
-        }
-        body > * { height: 100vh; }
-        .sidebar { flex: 0 0 250px; }
-        .sidebar > * {
-            width: calc(90% - 10px);
-            height: 25px;
-            margin-left: 5%;
-            background-color: red;
-            border-radius: 10000px;
-            padding: 0px 5px;
-            line-height: 25px;
-            text-align: center;
-        }
-        #tabs { background: #24031d; }
-        #scripts { background: #350419; }
-        #sections { background: #460515; }
-        #current { 
-            background: #570611; 
-            width: 100%;
-        }
-    </style>
-    <script>
-        let worker = new SharedWorker("worker.js");
-        let send = (...args) => worker.port.postMessage(args);
-        send("set-controller");
-        worker.port.onmessage = msg => {
-        console.log(msg);
-        if (msg.data[0] == "connection")
-            send("send-message", msg.data[1], ["get-display-name"]);
-        if (msg.data[0] == "message")
-            handle(msg.data);
-    };
 
-    function handle(data) {
-        if (data[3][0] == "get-display-name")
-            send("send-message", data[1], ["display-name", document.title]);
-    }
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Menu</title>
+  <link rel="stylesheet" href="menu/style.css">
+  <script src="menu/index.js" defer></script>
 </head>
+
 <body>
-    <div class="sidebar" id="tabs"></div>
-    <div class="sidebar" id="scripts"></div>
-    <div class="sidebar" id="sections"></div>
-    <div id="current"></div>
+  <div class="sidebar" id="tabs"></div>
+  <div class="sidebar" id="scripts"></div>
+  <div class="sidebar" id="sections"></div>
+  <div id="current"></div>
 </body>
+
 </html>

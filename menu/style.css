@@ -1,0 +1,31 @@
+body {
+  display: flex;
+  margin: 0;
+  color: white;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(36, 0, 2, 1) 0%, rgba(121, 9, 9, 1) 45%);
+}
+
+body>* {
+  height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 250px;
+  border-right: solid 1px #800;
+}
+
+.sidebar>* {
+  width: calc(90% - 10px);
+  height: 25px;
+  margin-left: 5%;
+  background-color: red;
+  border-radius: 10000px;
+  padding: 0px 5px;
+  line-height: 25px;
+  text-align: center;
+}
+
+#current {
+  width: 100%;
+}
