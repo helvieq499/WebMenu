@@ -6,7 +6,7 @@ body {
   background: linear-gradient(90deg, rgba(36, 0, 2, 1) 0%, rgba(121, 9, 9, 1) 45%);
 }
 
-body>* {
+body > * {
   height: 100vh;
 }
 
@@ -15,10 +15,11 @@ body>* {
   border-right: solid 1px #800;
 }
 
-.sidebar>* {
+.sidebar > * {
   width: calc(90% - 10px);
   height: 25px;
   margin-left: 5%;
+  margin-top: 4px;
   background-color: red;
   border-radius: 10000px;
   padding: 0px 5px;
