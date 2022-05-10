@@ -8,6 +8,7 @@ onconnect = event => {
   };
   this.connections[ctx.identity] = ctx;
   ctx.port.onmessage = event => handle(ctx, event);
+  ctx.port.postMessage(["identity", ctx.identity]);
   broadcast(["connection", ctx.identity]);
 }
 
