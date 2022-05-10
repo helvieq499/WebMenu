@@ -2,6 +2,7 @@ let worker = new SharedWorker("worker.js");
 let send = (...args) => worker.port.postMessage(args);
 
 send("set-controller");
+send("get-connections");
 
 worker.port.onmessage = msg => {
   console.log(msg);
