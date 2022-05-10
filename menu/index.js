@@ -7,7 +7,13 @@ worker.port.onmessage = msg => {
   console.log(msg);
   if (msg.data[0] == "connection")
     send("send-message", msg.data[1], ["get-display-name"]);
-  if (msg.data[0] == "message")
+  else if (msg.data[0] == "connections") {
+    let tabs = document.getElementById("tabs");
+    while (tabs.firstChild)
+      tabs.removeChild(tabs.firstChild);
+    for (let connection of msg.data[1])
+      send("send-message", connection, ["get-display-name"]);
+  } else if (msg.data[0] == "message")
     handle(msg.data);
 };
 
