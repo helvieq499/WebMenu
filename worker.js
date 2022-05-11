@@ -9,7 +9,7 @@ onconnect = event => {
   this.connections[ctx.identity] = ctx;
   ctx.port.onmessage = event => handle(ctx, event);
   ctx.port.postMessage(["identity", ctx.identity]);
-  broadcast(["connection", ctx.identity]);
+  broadcast(["connection", ctx.identity], ctx.identity);
 }
 
 function handle(ctx, event) {
@@ -24,7 +24,8 @@ function handle(ctx, event) {
     ctx.port.postMessage(["connections", Object.keys(connections)]);
 }
 
-function broadcast(data) {
+function broadcast(data, exclude) {
   for (let key of Object.keys(this.connections))
-    this.connections[key].port.postMessage(data);
+    if (key.identity != exclude)
+      this.connections[key].port.postMessage(data);
 }
