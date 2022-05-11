@@ -1,12 +1,13 @@
 let worker = new SharedWorker("worker.js");
 let send = (...args) => worker.port.postMessage(args);
+let alias = undefined;
 
 send("set-controller");
 send("get-connections");
 
 worker.port.onmessage = msg => {
   console.log(msg);
-  if (msg.data[0] == "connection")
+  if (msg.data[0] == "connection" && msg.data[1] != alias)
     send("send-message", msg.data[1], ["get-display-name"]);
   else if (msg.data[0] == "connections") {
     let tabs = document.getElementById("tabs");
@@ -16,6 +17,8 @@ worker.port.onmessage = msg => {
       send("send-message", connection, ["get-display-name"]);
   } else if (msg.data[0] == "message")
     handle(msg.data);
+  else if (msg.data[0] == "identity")
+    alias = msg.data[1];
 };
 
 function handle(data) {
