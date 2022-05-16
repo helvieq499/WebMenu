@@ -10,8 +10,8 @@ if (Array.isArray(ls.plugins))
     loadPlugin(plugin)
 
 function addPlugin(url) {
-  plugins.push(url);
-  plugins.save();
+  ls.plugins.push(url);
+  ls.save();
 }
 
 function loadPlugin(url) {
