@@ -8,6 +8,7 @@ ls.save = function () {
 if (Array.isArray(ls.plugins))
   for (let plugin of ls.plugins)
     loadPlugin(plugin)
+else ls.plugins = [];
 
 function addPlugin(url) {
   ls.plugins.push(url);
